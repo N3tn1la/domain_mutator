@@ -56,7 +56,6 @@ def add_numbers(domains, args):
             new_domains.append(str(it)+domain)
     return new_domains
 
-
 def switch_symbols(domains, args):
     """Going through domains and dict, replace symbols that there is in "switch_dict" by regexp"""
     new_domains = []
@@ -78,6 +77,14 @@ def switch_symbols(domains, args):
                         new_domains.append(word)
 
     return new_domains
+
+
+def switch_symbols_g(domains, args):
+    """Going through domains and dict, replace symbols that there is in "switch_dict" by regexp"""
+    new_domains=domains
+    for i in range(2):
+        new_domains.extend(set(switch_symbols(new_domains, args_parsed)))
+    return set(new_domains)
 
 
 def parse_arg_list(domains: str):
@@ -136,7 +143,7 @@ def args_parser():
 
 
 modules_dict = {'1': add_connectors, '2': add_common_words,
-                '3': add_numbers, '4': switch_symbols, }
+                '3': add_numbers, '4': switch_symbols_g, }
 
 if __name__ == "__main__":
     domains_list = []
@@ -149,7 +156,10 @@ if __name__ == "__main__":
     modules.sort(reverse=True)
 
     for module in modules:
-        domains_list.extend(modules_dict[module](domains_list, args_parsed))
+        if module == '4':
+            domains_list=modules_dict[module](domains_list, args_parsed)
+        else:
+            domains_list.extend(modules_dict[module](domains_list, args_parsed))
 
     if args_parsed.switching is not None:
         if args_parsed.switching:
