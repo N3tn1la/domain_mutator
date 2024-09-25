@@ -4,7 +4,7 @@ This module provides functionality for mutation domain names
 ### Usage
 
 ```
-python ./1.0.domain_mutator.py -t google,goo -m 1,3 -o ~/domains.txt -s .ru
+python ./1.0.domain_mutator.py -t google,goo -m 1,3 -o ~/domains.txt
 
 gobuster dns -w ~/domains.txt -d ru -t 400
 ```
