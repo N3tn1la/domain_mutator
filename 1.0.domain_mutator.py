@@ -1,6 +1,7 @@
 """This module provides functionality for mutation domain names
 
 TODO: rules like a hashcat
+TODO: logging via logger
 """
 
 import re
@@ -112,17 +113,17 @@ def args_parser():
 
         Usage example:
 
-        python ./1.0.Domain_mutator.py -t google,goo -m 1,3 -o ~/domains.txt -s .ru 
+        python ./1.0.domain_mutator.py -t google,goo -m 1,3 -o ~/domains.txt -s .ru 
         ''', formatter_class=RawTextHelpFormatter)
     parser.add_argument("-t", '--target', dest='target', type=str, required=True,
                         help="Target domain, domains for analisys (asd,asdf,asdfg). \
-                        WITHOUT TOP LEVEL! (.ru/...)")
+    WITHOUT TOP LEVEL! (.ru/...)")
     parser.add_argument("-m", '--modules', dest='modules', type=str, required=True, \
         help="MODULES (-m 1,2,3):\n\
-    	1)Add connectors between switch_symbols (abc,a-bc,ab-c,a-b-c)\n\
-    	2)Add common words (testabc,test-abc,abc-test,abctest)\n\
-    	3)Add number (1a,2a,3a,a1,a2,a3)\n\
-    	4)Switching (abcg,4bcg,abch,4bch) (not stable)\n")
+        1)Add connectors between switch_symbols (abc,a-bc,ab-c,a-b-c)\n\
+        2)Add common words (testabc,test-abc,abc-test,abctest)\n\
+        3)Add number (1a,2a,3a,a1,a2,a3)\n\
+        4)Switching (abcg,4bcg,abch,4bch) (not stable)\n")
     parser.add_argument("-sw", '--switching', action='store_const', dest='switching', default=False,
                         const=True, help="Switching mode, after all previous modules\n(not stable)")
     parser.add_argument("-n", '--numbercount', dest='numbercount', type=int,
